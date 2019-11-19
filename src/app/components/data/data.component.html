@@ -1,1 +1,65 @@
-<p>data works!</p>
+<h4>Formularios <small>Data</small></h4>
+<hr>
+<form [formGroup]="forma" (ngSubmit)="guardarCambios()">
+
+    <div formGroupName="nombrecompleto">
+        <!-- Nombre -->
+
+        <div class="form-group row" [ngClass]="{'has-danger': forma.get('nombrecompleto.nombre').invalid && forma.get('nombrecompleto.nombre').touched}">
+            <label class="col-2 col-form-label">Nombre</label>
+            <div class="col-8">
+
+                <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre">
+                <div *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.required && forma.controls['nombrecompleto'].controls['nombre'].touched" class="form-control-feedback">
+                    El elemento es requerido.
+                </div>
+                <div *ngIf="forma.controls['nombrecompleto'].controls['nombre'].errors?.minlength" class="form-control-feedback">
+                    El elemento tiene {{forma.controls['nombrecompleto'].controls['nombre'].errors?.minlength.actualLength}}, requiere de {{forma.controls['nombrecompleto'].controls['nombre'].errors?.minlength.requiredLength}} caracteres.
+                </div>
+            </div>
+        </div>
+        <!-- Apellido -->
+
+        <div class="form-group row" [ngClass]="{'has-danger': forma.get('nombrecompleto.apellido').invalid && forma.get('nombrecompleto.apellido').touched}">
+            <label class="col-2 col-form-label">Apellido</label>
+            <div class="col-8">
+
+                <input class="form-control" type="text" placeholder="Apellido" formControlName="apellido">
+                <div *ngIf="forma.controls['nombrecompleto'].controls['apellido'].errors?.required && forma.controls['nombrecompleto'].controls['apellido'].touched" class="form-control-feedback">
+                    El elemento es requerido.
+                </div>
+                <div *ngIf="forma.controls['nombrecompleto'].controls['apellido'].errors?.minlength" class="form-control-feedback">
+                    El elemento tiene {{forma.controls['nombrecompleto'].controls['apellido'].errors?.minlength.actualLength}}, requiere de {{forma.controls['nombrecompleto'].controls['apellido'].errors?.minlength.requiredLength}} caracteres.
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Correo -->
+    <div class="form-group row" [ngClass]="{'has-danger': forma.get('email').invalid && forma.get('email').touched}">
+        <label class="col-2 col-form-label">Correo</label>
+        <div class="col-md-8">
+
+            <input class="form-control" type="email" placeholder="Correo electrónico" formControlName="email">
+            <div *ngIf="forma.controls['email'].errors?.required && forma.controls['email'].touched" class="form-control-feedback">
+                El elemento es requerido.
+            </div>
+            <div *ngIf="forma.controls['email'].errors?.pattern" class="form-control-feedback">
+                El elemento tiene un patron del tipo: {{forma.controls['email'].errors?.pattern.requiredPattern}}
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Boton -->
+    <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group col-md-8">
+            <button type="submit" class="btn btn-outline-primary">
+        Guardar
+      </button>
+        </div>
+    </div>
+
+    {{forma.valid}}
+</form>
